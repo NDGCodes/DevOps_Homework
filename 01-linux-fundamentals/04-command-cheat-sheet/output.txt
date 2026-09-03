@@ -1,0 +1,21 @@
+=== DATE ===
+Tue Sep  1 14:13:13 UTC 2026
+=== HOSTNAME ===
+42b39cb88d6e
+=== USER ===
+root
+=== CURRENT FOLDER ===
+/work
+=== SYSTEM ===
+Linux 42b39cb88d6e 6.10.14-linuxkit aarch64 GNU/Linux
+=== DISK ===
+Filesystem  Size  Used  Avail  Use%  Mounted on
+overlay     453G   45G   385G   11%  /
+=== MEMORY ===
+       total  used   free
+Mem:   7.7Gi  4.5Gi  728Mi
+Swap:  1.0Gi     0B  1.0Gi
+=== PROCESSES ===
+USER  PID  COMMAND
+root    1  bash ./practice.sh
+root  209  ps aux

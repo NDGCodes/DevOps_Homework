@@ -1,0 +1,21 @@
+=== IP ADDRESS ===
+lo      UNKNOWN  127.0.0.1/8 ::1/128
+eth0    UP       172.17.0.2/16
+
+=== ROUTE ===
+default via 172.17.0.1 dev eth0
+172.17.0.0/16 dev eth0 scope link
+
+=== PING ===
+2 packets sent, 2 received, 0% packet loss
+
+=== DNS ===
+172.66.147.243  example.com
+104.20.23.154   example.com
+
+=== OPEN PORTS ===
+No listening ports in the test container.
+
+=== HTTP HEADERS ===
+HTTP/2 200
+server: cloudflare

@@ -1,0 +1,4 @@
+services:
+  apache:
+    image: httpd:2.4-alpine
+    network_mode: host
