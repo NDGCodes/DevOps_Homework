@@ -147,7 +147,6 @@ curl web-service.yatri-prod.svc.cluster.local     -> Hello from yatri-prod
 
 ![Cross-namespace DNS responses](03-namespaces/namespace-dns_24bcs10451.png)
 
-
 ## Takeaway
 
 The control plane records desired state and controllers work to match it, `kubectl` is only a client of that API, and namespaces scope object names so one cluster can hold several environments. The Pods Deployments, Services, and Ingress rules in the following sections are all built on these mechanics.
