@@ -41,6 +41,8 @@ I verified the UI at http://localhost:5002 and tested the health, greeting, and 
 
 ![Application API](evidence/application-api_24bcs10451.png)
 
+![Localhost frontend](evidence/frontend-browser_24bcs10451.png)
+
 ## Security configuration
 
 [Configured workflow](.github/workflows/devsecops.yml) adds a source secret scan and a strict [Trivy policy](trivy.yaml) to the supplied workflow, using Docker Hub account `ndg007`. The strict workflow and policy are now installed in the demo repository.
