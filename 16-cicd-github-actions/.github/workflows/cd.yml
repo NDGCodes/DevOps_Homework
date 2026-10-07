@@ -1,0 +1,46 @@
+name: Calculator CD
+
+on:
+  workflow_run:
+    workflows: [Final CI Pipeline]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  deliver:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tested revision
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - name: Download tested build
+        uses: actions/download-artifact@v4
+        with:
+          name: calculator-build
+          path: build
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build container
+        run: docker build -t calculator:${{ github.event.workflow_run.head_sha }} .
+      - name: Verify calculator container
+        run: |
+          result=$(printf '10 + 5\nquit\n' | docker run --rm -i calculator:${{ github.event.workflow_run.head_sha }})
+          printf '%s\n' "$result"
+          printf '%s\n' "$result" | grep -F 'Result: 15.0'
+      - name: Package image for delivery
+        run: docker save calculator:${{ github.event.workflow_run.head_sha }} | gzip > calculator-image.tar.gz
+      - name: Upload container artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculator-image
+          path: calculator-image.tar.gz
+          retention-days: 7

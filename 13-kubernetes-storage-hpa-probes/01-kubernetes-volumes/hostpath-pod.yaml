@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-demo
+spec:
+  containers:
+  - name: alpine
+    image: alpine:latest
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - name: host-volume
+      mountPath: /data
+  volumes:
+  - name: host-volume
+    hostPath:
+      path: /tmp/student-data
+      type: DirectoryOrCreate

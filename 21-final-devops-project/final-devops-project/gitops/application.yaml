@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: taskboard
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/NDGCodes/session20-gitops-demo.git
+    targetRevision: main
+    path: helm/taskboard
+    helm:
+      valueFiles: [values-dev.yaml]
+      parameters:
+        - {name: monitoring.serviceMonitor.enabled, value: "false"}
+        - {name: ingress.enabled, value: "false"}
+        - {name: backend.image, value: ghcr.io/ndgcodes/taskboard-backend}
+        - {name: frontend.image, value: ghcr.io/ndgcodes/taskboard-frontend}
+        - {name: backend.tag, value: 302b67319867e4baf17e219fe1fc9d248b7c0122}
+        - {name: frontend.tag, value: 302b67319867e4baf17e219fe1fc9d248b7c0122}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: taskboard
+  syncPolicy:
+    automated: {prune: true, selfHeal: true}
+    syncOptions: [CreateNamespace=true]

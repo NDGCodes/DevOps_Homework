@@ -1,0 +1,10 @@
+groups:
+  - name: session20-demo
+    rules:
+      - alert: PrometheusMemoryDemo
+        expr: process_resident_memory_bytes{job="prometheus"} > 1
+        for: 0s
+        labels:
+          severity: info
+        annotations:
+          summary: "Demonstration alert: Prometheus memory exceeds 1 byte"
