@@ -9,8 +9,6 @@ CLI, and namespaces.
 | kubectl basics | `02-kubectl-basics/hello-pod.yaml` | Inspecting, debugging, and reaching a Pod from the CLI |
 | Namespaces | `03-namespaces/` | Isolating environments and resolving Services across them |
 
-The commands for every task are in [running.md](running.md).
-
 ## Cluster Architecture
 
 A Kubernetes cluster is split into a control plane, which decides what should
